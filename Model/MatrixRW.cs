@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Text;
 
@@ -219,10 +220,96 @@ namespace MyNameSpace
             }  
         }
         /// <summary>
-        /// Get new matrix without i-th row и j-th col.
+        /// Isert new row to row number 'index'.
         /// </summary>
         /// <param name="row"></param>
+        /// <param name="index"></param>
+        public void InsertRow(List<double> row, int index)
+        {
+            if (index<0)
+            {
+                index = 0;
+            }
+            if (index>Rows)
+            {
+                index = Rows;
+            }
+            var newRows = Rows+1;
+            var newCols = Cols;
+            var NewArray = new double[newRows, newCols];
+            for (int i = 0; i < newRows; i++)
+            {
+                if (i == index)
+                {
+                    for (int j = 0; j < Cols; j++)
+                    {
+                        NewArray[i, j] = row[j];
+                    }
+                }
+                if (i<index)
+                {
+                    for (int j = 0; j < Cols; j++)
+                    {
+                        NewArray[i, j] = Array[i, j];
+                    }  
+                } 
+                if (i>index)
+                {
+                    for (int j = 0; j < Cols; j++)
+                    {
+                        NewArray[i, j] = Array[i-1, j];
+                    }
+                }
+            }
+            Rows = newRows;
+            Cols = newCols;
+            Array = NewArray;
+        }
+        /// <summary>
+        /// Isert new col to col number 'index'.
+        /// </summary>
         /// <param name="col"></param>
-        /// <returns></returns>
+        /// <param name="index"></param>
+        public void InsertCol(List<double> col, int index)
+        {
+            if (index < 0)
+            {
+                index = 0;
+            }
+            if (index > Cols)
+            {
+                index = Cols;
+            }
+            var newRows = Rows;
+            var newCols = Cols+1;
+            var NewArray = new double[newRows, newCols];
+            for (int j = 0; j < newCols; j++)
+            {
+                if (j == index)
+                {
+                    for (int i = 0; i < Rows; i++)
+                    {
+                        NewArray[i, j] = col[i];
+                    }
+                }
+                if (j < index)
+                {
+                    for (int i = 0; i < Rows; i++)
+                    {
+                        NewArray[i, j] = Array[i, j];
+                    }
+                }
+                if (j > index)
+                {
+                    for (int i = 0; i < Rows; i++)
+                    {
+                        NewArray[i, j] = Array[i, j-1];
+                    }
+                }
+            }
+            Rows = newRows;
+            Cols = newCols;
+            Array = NewArray;
+        }
     }
 }

@@ -1,5 +1,6 @@
 ﻿
 using System;
+using System.Collections.Generic;
 
 namespace MyNameSpace
 {
@@ -35,9 +36,17 @@ namespace MyNameSpace
             resultMatrix = matrix1.MultiplyMatrixToValue(2);
             Console.WriteLine("5=======================5");
             Console.WriteLine(resultMatrix.ToString());
-            
+
             resultMatrix.WriteMatrixToFile("result.txt");
 
+            var lst = new List<double>() { 1, 2, 3 };
+            matrix1.InsertCol(lst, 0);
+            Console.WriteLine("6=======================6");
+            Console.WriteLine(matrix1.ToString());
+            lst.Add(4);
+            matrix1.InsertRow(lst, 0);
+            Console.WriteLine("7=======================7");
+            Console.WriteLine(matrix1.ToString());
             Console.ReadLine();
         }
     }
